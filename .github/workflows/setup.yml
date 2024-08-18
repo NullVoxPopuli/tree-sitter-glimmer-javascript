@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
       - name: Install tree-sitter CLI
         uses: tree-sitter/setup-action/cli@v1
         with:
@@ -19,7 +20,9 @@ jobs:
       - name: Remove template files
         run: rm .gitattributes .github/workflows/setup.yml
       - name: Generate bindings
-        run: tree-sitter generate
+        run: |
+          npm install
+          tree-sitter generate
       - name: Set environment variables
         run: |-
           printf 'PARSER_NAME=%s\n' $(jq -r '.keywords[3]' package.json) >> "$GITHUB_ENV"
