@@ -12,7 +12,7 @@ const JavaScript = require("tree-sitter-javascript/grammar");
  *   https://github.com/ember-tooling/tree-sitter-glimmer
  */
 module.exports = grammar(JavaScript, {
-  name: "glimmerjavascript",
+  name: "glimmer_javascript",
 
   /**
    * TODO: add support for attributes

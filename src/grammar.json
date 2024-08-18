@@ -1,5 +1,5 @@
 {
-  "name": "glimmerjavascript",
+  "name": "glimmer_javascript",
   "word": "identifier",
   "rules": {
     "program": {

@@ -4,7 +4,7 @@
 
 using namespace v8;
 
-extern "C" TSLanguage * tree_sitter_glimmerjavascript();
+extern "C" TSLanguage * tree_sitter_glimmer_javascript();
 
 namespace {
 
@@ -17,12 +17,12 @@ void Init(Local<Object> exports, Local<Object> module) {
 
   Local<Function> constructor = Nan::GetFunction(tpl).ToLocalChecked();
   Local<Object> instance = constructor->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
-  Nan::SetInternalFieldPointer(instance, 0, tree_sitter_glimmerjavascript());
+  Nan::SetInternalFieldPointer(instance, 0, tree_sitter_glimmer_javascript());
 
-  Nan::Set(instance, Nan::New("name").ToLocalChecked(), Nan::New("glimmerjavascript").ToLocalChecked());
+  Nan::Set(instance, Nan::New("name").ToLocalChecked(), Nan::New("glimmer_javascript").ToLocalChecked());
   Nan::Set(module, Nan::New("exports").ToLocalChecked(), instance);
 }
 
-NODE_MODULE(tree_sitter_glimmerjavascript_binding, Init)
+NODE_MODULE(tree_sitter_glimmer_javascript_binding, Init)
 
 }  // namespace

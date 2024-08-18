@@ -1,7 +1,7 @@
 {
   "targets": [
     {
-      "target_name": "tree_sitter_glimmerjavascript_binding",
+      "target_name": "tree_sitter_glimmer_javascript_binding",
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
         "src"

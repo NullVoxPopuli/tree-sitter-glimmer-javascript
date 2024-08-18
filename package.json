@@ -21,14 +21,14 @@
   "scripts": {
     "install": "node-gyp-build",
     "prebuildify": "prebuildify --napi --strip",
-    "build": "npx tree-sitter generate --no-bindings",
+    "build": "tree-sitter generate --no-bindings",
     "lint": "eslint common/define-grammar.js",
     "parse": "tree-sitter parse",
     "test": "tree-sitter test"
   },
   "tree-sitter": [
     {
-      "scope": "source.ts",
+      "scope": "source.gjs",
       "file-types": [
         "gjs",
         "javascript.glimmer"
