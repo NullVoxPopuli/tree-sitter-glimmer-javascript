@@ -1,0 +1,18 @@
+============================================
+JSDoc
+============================================
+
+/*
+ * @return {void}
+ */
+function foo() {}
+
+----
+
+(program
+  (comment)
+  (function_declaration
+    (identifier)
+    (formal_parameters)
+    (statement_block)))
+

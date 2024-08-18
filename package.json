@@ -11,6 +11,26 @@
     "tree-sitter",
     "javascript"
   ],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
+  "dependencies": {
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "eslint": ">=8.57.0",
     "eslint-config-google": "^0.14.0",
@@ -51,11 +71,14 @@
     }
   ],
   "pnpm": {
-    "onlyBuiltDependencies": ["tree-sitter-cli"]
+    "onlyBuiltDependencies": [
+      "tree-sitter-cli"
+    ]
   },
   "volta": {
     "node": "20.16.0",
     "pnpm": "9.7.1"
   },
-  "main": "bindings/node"
+  "main": "bindings/node",
+  "types": "bindings/node"
 }

@@ -5,6 +5,9 @@ on:
 
 permissions: write-all
 
+env:
+  PARSER_NAME: tree-sitter-glimmer-javascript
+
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -12,6 +15,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
       - name: Install tree-sitter CLI
         uses: tree-sitter/setup-action/cli@v1
         with:
@@ -19,10 +23,11 @@ jobs:
       - name: Remove template files
         run: rm .gitattributes .github/workflows/setup.yml
       - name: Generate bindings
-        run: tree-sitter generate
+        run: |
+          npm install
+          tree-sitter generate
       - name: Set environment variables
         run: |-
-          printf 'PARSER_NAME=%s\n' $(jq -r '.keywords[3]' package.json) >> "$GITHUB_ENV"
           if [[ -n $AUTHOR_EMAIL && ${AUTHOR_EMAIL#*@} != users.noreply.github.com ]]; then
             AUTHOR_NAME_EMAIL="$AUTHOR_NAME <$AUTHOR_EMAIL>"
           fi
@@ -35,17 +40,6 @@ jobs:
           AUTHOR_EMAIL: ${{github.event.head_commit.author.email}}
       - name: Update files
         run: |-
-          sed -i README.md \
-            -e 's/PARSER_NAME/${{env.PARSER_NAME}}/' \
-            -e 's/tree-sitter-grammars/${{env.REPO_OWNER}}/'
-          sed -i LICENSE -e 's/AUTHOR_NAME/${{env.AUTHOR_NAME}}/'
-          sed -i grammar.js \
-            -e 's/TODO:/NOTE:/' \
-            -e 's/source_file.*/changeme: $ => "",/'
-          sed -i package.json \
-            -e '/"scope"/a \      "highlights": "queries/highlights.scm",' \
-            -e '/"repository"/a \  "author": "${{env.AUTHOR_NAME_EMAIL}}",' \
-            -e '/"repository"/s|github:.*"|github:${{github.repository}}"|'
           sed -i Cargo.toml \
             -e '/^repository/a authors = ["${{env.AUTHOR_NAME_EMAIL}}"]' \
             -e '/^repository/s|/tree-sitter/.*|/${{github.repository}}"|'
@@ -66,12 +60,6 @@ jobs:
             -e '/Uncomment these/s/Uncomment.*/NOTE: \l&:/'
           sed -i bindings/go/binding_test.go \
             -e 's|/tree-sitter/.*|/${{github.repository}}"|'
-          sed -i .github/ISSUE_TEMPLATE/bug_report.yml \
-            -e 's/PARSER_NAME/${{env.PARSER_NAME}}/' \
-            -e 's/tree-sitter-grammars/${{env.REPO_OWNER}}'
-          sed -i .github/ISSUE_TEMPLATE/feature_request.yml \
-            -e 's/PARSER_NAME/${{env.PARSER_NAME}}/'
-          mv .github/not-dependabot.yml .github/dependabot.yml
         env:
           REPO_OWNER: ${{github.repository_owner}}
           REPO_NAME: ${{github.event.repository.name}}
