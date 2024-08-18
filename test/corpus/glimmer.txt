@@ -4,7 +4,7 @@ Simple
 
 const Named = <template>
   {{ (doubled foo) }}
-</template>
+</template>;
 
 ----
 
@@ -21,7 +21,7 @@ const Named = <template>
 Empty
 ============================================
 
-<template></template>
+<template></template>;
 
 ----
 
@@ -63,7 +63,7 @@ const WithSemi = <template>
 Multiple Assignment
 ============================================
 
-const Empty = <template></template>
+const Empty = <template></template>;
 
 const WithSemi = <template>
   <Empty />
@@ -124,7 +124,7 @@ JS Regex Evasion
 <template>
   {{#if true}}
   {{/if}}
-</template>
+</template>;
 
 ----
 
