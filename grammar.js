@@ -1,6 +1,7 @@
 "use strict";
 
 const JavaScript = require("tree-sitter-javascript/grammar");
+
 /**
  * A <template></template> block can exist in
  * two types of locations:
@@ -13,17 +14,18 @@ const JavaScript = require("tree-sitter-javascript/grammar");
  */
 module.exports = grammar(JavaScript, {
   name: "glimmer_javascript",
+  rules: {},
 
-  /**
-   * TODO: add support for attributes
-   *       e.g.:
-   *
-   *       <template trim-invisibles>
-   *       <template signature:{SomeInterface}>
-   *
-   *       Either will require RFC
-   *         https://github.com/emberjs/rfcs/
-   */
+  // /**
+  //  * TODO: add support for attributes
+  //  *       e.g.:
+  //  *
+  //  *       <template trim-invisibles>
+  //  *       <template signature:{SomeInterface}>
+  //  *
+  //  *       Either will require RFC
+  //  *         https://github.com/emberjs/rfcs/
+  //  */
   // glimmer_template: ($) =>
   //   choice(
   //     seq(
@@ -72,15 +74,18 @@ module.exports = grammar(JavaScript, {
   //  * TS: https://github.com/tree-sitter/tree-sitter-typescript/blob/master/common/define-grammar.js#L419
   //  * JS: https://github.com/tree-sitter/tree-sitter-javascript/blob/master/grammar.js#L1150
   //  */
-  //   class_body: $ => seq(
-  //     '{',
-  //     repeat(choice(
-  //       seq(field('member', $.method_definition), optional(';')),
-  //       seq(field('member', $.field_definition), $._semicolon),
-  //       field('member', $.class_static_block),
-  //       field('template', $.glimmer_template),
-  //       ';',
-  //     )),
-  //     '}',
+  // class_body: ($) =>
+  //   seq(
+  //     "{",
+  //     repeat(
+  //       choice(
+  //         seq(field("member", $.method_definition), optional(";")),
+  //         seq(field("member", $.field_definition), $._semicolon),
+  //         field("member", $.class_static_block),
+  //         field("template", $.glimmer_template),
+  //         ";",
+  //       ),
+  //     ),
+  //     "}",
   //   ),
 });
