@@ -2,22 +2,24 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+      - main
     paths:
-      - "scripts.js"
-      - "common/*"
-      - "*/grammar.js"
-      - "*/src/**"
-      - "bindings/**"
-      - "binding.gyp"
+      - grammar.js
+      - src/**
+      - test/**
+      - bindings/**
+      - binding.gyp
+      - .github/workflows/ci.yml
   pull_request:
     paths:
-      - "scripts.js"
-      - "common/*"
-      - "*/grammar.js"
-      - "*/src/**"
-      - "bindings/**"
-      - "binding.gyp"
+      - grammar.js
+      - src/**
+      - test/**
+      - bindings/**
+      - binding.gyp
+      - .github/workflows/ci.yml
 
 concurrency:
   group: ${{github.workflow}}-${{github.ref}}
@@ -25,8 +27,11 @@ concurrency:
 
 jobs:
   test:
-    name: Test parsers
+    name: Test parser
     runs-on: ${{matrix.os}}
+    if: >-
+      !github.event.repository.is_template &&
+      github.event.head_commit.message != 'Initial commit'
     strategy:
       fail-fast: false
       matrix:
@@ -36,20 +41,27 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v1
-      - name: Set up examples
-        run: |-
-          git clone https://github.com/desktop/desktop examples/desktop --single-branch --depth=1 --filter=blob:none
-          git clone https://github.com/reduxjs/redux examples/redux --single-branch --depth=1 --filter=blob:none
-          git clone https://github.com/microsoft/vscode examples/vscode --single-branch --depth=1 --filter=blob:none
       - name: Run tests
         uses: tree-sitter/parser-test-action@v2
         with:
           test-rust: ${{runner.os == 'Linux'}}
-      - name: Parse examples
-        id: test
-        uses: tree-sitter/parse-action@v4
-        with:
-          files: |
-            examples/**/*.ts
-            examples/**/*.tsx
-            !examples/redux/src/types/store.ts
+  fuzz:
+    name: Fuzz scanner
+    runs-on: ubuntu-latest
+    if: >-
+      !github.event.repository.is_template &&
+      github.event.head_commit.message != 'Initial commit'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check for scanner changes
+        id: scanner-check
+        shell: sh
+        run: |-
+          {
+            test -f src/scanner.c && ! git diff --quiet HEAD^ -- "$_" &&
+            printf 'changed=true\n' || printf 'changed=false\n'
+          } >> "$GITHUB_OUTPUT"
+      - name: Run fuzzer
+        uses: tree-sitter/fuzz-action@v4
+        if: steps.scanner-check.outputs.changed == 'true'
