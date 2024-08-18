@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-glimmer-javascript",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Glimmer-flavored JavaScript grammar for tree-sitter",
   "repository": "github:NullVoxPopuli/tree-sitter-glimmer-javascript",
   "license": "MIT",
