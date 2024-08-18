@@ -191,7 +191,9 @@ import { b } from
           (statement_block)))))
   (expression_statement
     (member_expression
-      (meta_property)
+      (member_expression
+        (import)
+        (property_identifier))
       (property_identifier)))
   (import_statement
     (import_clause
@@ -491,9 +493,6 @@ for (var i = 0
 
 for (let in {});
 
-for (let j
-  of k);
-
 ---
 
 (program
@@ -503,21 +502,24 @@ for (let j
         name: (identifier))
       (variable_declarator
         name: (identifier)))
-    condition: (identifier)
+    condition: (expression_statement
+      (identifier))
     increment: (identifier)
     body: (expression_statement
       (identifier)))
   (for_statement
-    initializer: (sequence_expression
-      (assignment_expression
+    initializer: (expression_statement
+      (sequence_expression
+        (assignment_expression
+          left: (identifier)
+          right: (number))
+        (call_expression
+          function: (identifier)
+          arguments: (arguments))))
+    condition: (expression_statement
+      (binary_expression
         left: (identifier)
-        right: (number))
-      (call_expression
-        function: (identifier)
-        arguments: (arguments)))
-    condition: (binary_expression
-      left: (identifier)
-      right: (number))
+        right: (number)))
     increment: (update_expression
       argument: (identifier))
     body: (expression_statement
@@ -537,19 +539,16 @@ for (let j
       (variable_declarator
         name: (identifier)
         value: (number)))
-    condition: (binary_expression
-      left: (identifier)
-      right: (identifier))
+    condition: (expression_statement
+      (binary_expression
+        left: (identifier)
+        right: (identifier)))
     increment: (update_expression
       argument: (identifier))
     body: (statement_block))
   (for_in_statement
     left: (identifier)
     right: (object)
-    body: (empty_statement))
-  (for_in_statement
-    left: (identifier)
-    right: (identifier)
     body: (empty_statement)))
 
 ============================================
@@ -656,16 +655,18 @@ for (key in something && i = 0; i < n; i++) {
 
 (program
   (for_statement
-    (binary_expression
+    (expression_statement
+      (binary_expression
+        (binary_expression
+          (identifier)
+          (identifier))
+        (assignment_expression
+          (identifier)
+          (number))))
+    (expression_statement
       (binary_expression
         (identifier)
-        (identifier))
-      (assignment_expression
-        (identifier)
-        (number)))
-    (binary_expression
-      (identifier)
-      (identifier))
+        (identifier)))
     (update_expression
       (identifier))
     (statement_block

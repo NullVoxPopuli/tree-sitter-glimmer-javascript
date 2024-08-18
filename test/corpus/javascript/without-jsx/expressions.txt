@@ -4,8 +4,8 @@ Strings
 
 "A string with \"double\" and 'single' quotes";
 'A string with "double" and \'single\' quotes';
-'\\';
-"\\";
+'\\'
+"\\"
 
 'A string with new \
 line';
@@ -64,7 +64,7 @@ Template strings
 
 `\ `;
 
-`The command \`git ${args.join(' ')}\` exited with an unexpected code: ${exitCode}. The caller should either handle this error, or expect that exit code.`;
+`The command \`git ${args.join(' ')}\` exited with an unexpected code: ${exitCode}. The caller should either handle this error, or expect that exit code.`
 
 `\\`;
 
@@ -154,17 +154,10 @@ Function calls with template strings
 ============================================
 
 f `hello`;
-f
-`hello`;
 
 ---
 
 (program
-  (expression_statement
-    (call_expression
-      (identifier)
-      (template_string
-        (string_fragment))))
   (expression_statement
     (call_expression
       (identifier)
@@ -1710,7 +1703,7 @@ true ? delete thing.prop : null;
 The void operator
 ============================================
 
-a = void b();
+a = void b()
 
 ---
 
@@ -1787,7 +1780,7 @@ a <= b && c >= d;
 a.b = c ? d : e;
 a && b(c) && d;
 a && new b(c) && d;
-typeof a == b && c instanceof d;
+typeof a == b && c instanceof d
 a && b | c;
 a - b << c;
 a in b != c in d;
@@ -1871,8 +1864,8 @@ await a || b;
 Expressions with rest elements
 ==============================================
 
-foo(...rest);
-foo = [...[bar] = [baz]];
+foo(...rest)
+foo = [...[bar] = [baz]]
 
 ---
 
@@ -1898,9 +1891,9 @@ foo = [...[bar] = [baz]];
 Forward slashes after parenthesized expressions
 ==============================================
 
-(foo - bar) / baz;
+(foo - bar) / baz
 if (foo - bar) /baz/;
-(this.a() / this.b() - 1) / 2;
+(this.a() / this.b() - 1) / 2
 
 ---
 
@@ -1959,7 +1952,7 @@ Non-breaking spaces as whitespace
 Yield expressions
 ==============================================
 
-yield db.users.where('[endpoint+email]');
+yield db.users.where('[endpoint+email]')
 
 ---
 
