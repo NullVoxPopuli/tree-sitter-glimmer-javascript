@@ -5,6 +5,9 @@ on:
 
 permissions: write-all
 
+env:
+  PARSER_NAME: tree-sitter-glimmer-javascript
+
 jobs:
   setup:
     runs-on: ubuntu-latest
