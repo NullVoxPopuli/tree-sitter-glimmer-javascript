@@ -50,14 +50,6 @@
         "named": true
       },
       {
-        "type": "jsx_element",
-        "named": true
-      },
-      {
-        "type": "jsx_self_closing_element",
-        "named": true
-      },
-      {
         "type": "new_expression",
         "named": true
       },
