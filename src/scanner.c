@@ -3,8 +3,6 @@
 //
 //
 // Scanners are not extensible, so we have to copy them,
-// and then keep them up to date...
-// Not sure if technical limitation or something else. 
 //
 // To Update:
 //  - delete everything under the comment block
