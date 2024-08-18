@@ -1,0 +1,21 @@
+{
+    "files.exclude": {
+        ".editorconfig": true,
+        ".gitattributes": true,
+        ".github": true,
+        ".gitignore": true,
+        ".vscode/": true,
+        "binding.gyp": true,
+        "bindings": true,
+        "Cargo.toml": true,
+        "node_modules": true,
+        "package.json": true,
+        "pnpm-lock.yaml": true,
+        "src/": true
+    },
+    "recommendations": [
+      "EditorConfig.EditorConfig",
+      "esbenp.prettier-vscode",
+      "rebornix.scheme"
+    ]
+}
