@@ -16,6 +16,24 @@ const Named = <template>
         (glimmer_opening_tag)
         (glimmer_closing_tag)))))
 
+============================================
+Nested Template
+============================================
+
+const Named = <template>
+  \<template>
+</template>
+
+----
+
+(program
+  (lexical_declaration
+    (variable_declarator
+      (identifier)
+      (glimmer_template
+        (glimmer_opening_tag)
+        (glimmer_closing_tag)))))
+
 
 ============================================
 Empty

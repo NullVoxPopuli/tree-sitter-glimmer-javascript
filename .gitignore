@@ -1,3 +1,6 @@
+# Local testing, not published
+parser/
+
 # Rust artifacts
 Cargo.lock
 target/
