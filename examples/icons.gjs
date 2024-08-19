@@ -1,12 +1,10 @@
-import type { TOC } from '@ember/component/template-only';
-
-export const XTwitter: TOC<{ Element: SVGElement }> = <template>
+export const XTwitter = <template>
   <svg aria-hidden="true" ...attributes>
     <use xlink:href="#social-xtwitter" />
   </svg>
 </template>;
 
-export const Discord: TOC<{ Element: SVGElement }> = <template>
+export const Discord = <template>
   <svg aria-hidden="true" ...attributes>
     <use xlink:href="#social-discord" />
   </svg>

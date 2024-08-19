@@ -7,14 +7,7 @@ import { modifier as eModifier } from 'ember-modifier';
 import { cell } from 'ember-resources';
 import { getTabster, getTabsterAttribute, setTabsterAttribute, Types } from 'tabster';
 
-import { Popover, type Signature as PopoverSignature } from './popover.gts';
-
-import type { TOC } from '@ember/component/template-only';
-import type { WithBoundArgs } from '@glint/template';
-
-type Cell<V> = ReturnType<typeof cell<V>>;
-type PopoverArgs = PopoverSignature['Args'];
-type PopoverBlockParams = PopoverSignature['Blocks']['default'][0];
+import { Popover } from './popover.gts';
 
 const TABSTER_CONFIG_CONTENT = getTabsterAttribute(
   {
@@ -31,34 +24,7 @@ const TABSTER_CONFIG_TRIGGER = {
   deloser: {},
 };
 
-export interface Signature {
-  Args: PopoverArgs;
-  Blocks: {
-    default: [
-      {
-        arrow: PopoverBlockParams['arrow'];
-        trigger: WithBoundArgs<
-          typeof trigger,
-          'triggerElement' | 'contentId' | 'isOpen' | 'setHook'
-        >;
-        Trigger: WithBoundArgs<typeof Trigger, 'triggerModifier'>;
-        Content: WithBoundArgs<
-          typeof Content,
-          'triggerElement' | 'contentId' | 'isOpen' | 'PopoverContent'
-        >;
-        isOpen: boolean;
-      },
-    ];
-  };
-}
-
-export interface SeparatorSignature {
-  Element: HTMLDivElement;
-  Args: {};
-  Blocks: { default: [] };
-}
-
-const Separator: TOC<SeparatorSignature> = <template>
+const Separator = <template>
   <div role="separator" ...attributes>
     {{yield}}
   </div>
@@ -75,7 +41,7 @@ const Separator: TOC<SeparatorSignature> = <template>
  * If we used `mouseOver`/`mouseEnter` it would not re-focus when the mouse
  * wiggles. This is to match native menu implementation.
  */
-function focusOnHover(e: PointerEvent) {
+function focusOnHover(e) {
   const item = e.currentTarget;
 
   if (item instanceof HTMLElement) {
@@ -83,13 +49,7 @@ function focusOnHover(e: PointerEvent) {
   }
 }
 
-export interface ItemSignature {
-  Element: HTMLButtonElement;
-  Args: { onSelect?: (event: Event) => void };
-  Blocks: { default: [] };
-}
-
-const Item: TOC<ItemSignature> = <template>
+const Item = <template>
   <button
     type="button"
     role="menuitem"
@@ -102,15 +62,7 @@ const Item: TOC<ItemSignature> = <template>
   </button>
 </template>;
 
-const installContent = eModifier<{
-  Element: HTMLElement;
-  Args: {
-    Named: {
-      isOpen: Cell<boolean>;
-      triggerElement: Cell<HTMLElement>;
-    };
-  };
-}>((element, _: [], { isOpen, triggerElement }) => {
+const installContent = eModifier((element, _, { isOpen, triggerElement }) => {
   // focus first focusable element on the content
   const tabster = getTabster(window);
   const firstFocusable = tabster?.focusable.findFirst({
@@ -120,19 +72,19 @@ const installContent = eModifier<{
   firstFocusable?.focus();
 
   // listen for "outside" clicks
-  function onDocumentClick(e: MouseEvent) {
+  function onDocumentClick(e) {
     if (
       isOpen.current &&
       e.target &&
-      !element.contains(e.target as HTMLElement) &&
-      !triggerElement.current?.contains(e.target as HTMLElement)
+      !element.contains(e.target) &&
+      !triggerElement.current?.contains(e.target)
     ) {
       isOpen.current = false;
     }
   }
 
   // listen for the escape key
-  function onDocumentKeydown(e: KeyboardEvent) {
+  function onDocumentKeydown(e) {
     if (isOpen.current && e.key === 'Escape') {
       isOpen.current = false;
     }
@@ -147,24 +99,7 @@ const installContent = eModifier<{
   };
 });
 
-interface PrivateContentSignature {
-  Element: HTMLDivElement;
-  Args: {
-    triggerElement: Cell<HTMLElement>;
-    contentId: string;
-    isOpen: Cell<boolean>;
-    PopoverContent: PopoverBlockParams['Content'];
-  };
-  Blocks: { default: [{ Item: typeof Item; Separator: typeof Separator }] };
-}
-
-export interface ContentSignature {
-  Element: PrivateContentSignature['Element'];
-  Args: {};
-  Blocks: PrivateContentSignature['Blocks'];
-}
-
-const Content: TOC<PrivateContentSignature> = <template>
+const Content = <template>
   {{#if @isOpen.current}}
     <@PopoverContent
       id={{@contentId}}
@@ -180,24 +115,8 @@ const Content: TOC<PrivateContentSignature> = <template>
   {{/if}}
 </template>;
 
-interface PrivateTriggerModifierSignature {
-  Element: HTMLElement;
-  Args: {
-    Named: {
-      triggerElement: Cell<HTMLElement>;
-      isOpen: Cell<boolean>;
-      contentId: string;
-      setHook: PopoverBlockParams['setHook'];
-    };
-  };
-}
-
-export interface TriggerModifierSignature {
-  Element: PrivateTriggerModifierSignature['Element'];
-}
-
-const trigger = eModifier<PrivateTriggerModifierSignature>(
-  (element, _: [], { triggerElement, isOpen, contentId, setHook }) => {
+const trigger = eModifier(
+  (element, _, { triggerElement, isOpen, contentId, setHook }) => {
     element.setAttribute('aria-haspopup', 'menu');
 
     if (isOpen.current) {
@@ -223,33 +142,16 @@ const trigger = eModifier<PrivateTriggerModifierSignature>(
   }
 );
 
-interface PrivateTriggerSignature {
-  Element: HTMLButtonElement;
-  Args: {
-    triggerModifier: WithBoundArgs<
-      typeof trigger,
-      'triggerElement' | 'contentId' | 'isOpen' | 'setHook'
-    >;
-  };
-  Blocks: { default: [] };
-}
-
-export interface TriggerSignature {
-  Element: PrivateTriggerSignature['Element'];
-  Args: {};
-  Blocks: PrivateTriggerSignature['Blocks'];
-}
-
-const Trigger: TOC<PrivateTriggerSignature> = <template>
+const Trigger = <template>
   <button type="button" {{@triggerModifier}} ...attributes>
     {{yield}}
   </button>
 </template>;
 
-const IsOpen = () => cell<boolean>(false);
-const TriggerElement = () => cell<HTMLElement>();
+const IsOpen = () => cell(false);
+const TriggerElement = () => cell();
 
-export class Menu extends Component<Signature> {
+export class Menu extends Component {
   contentId = guidFor(this);
 
   <template>
