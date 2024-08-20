@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-glimmer-javascript",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Glimmer-flavored JavaScript grammar for tree-sitter",
   "repository": "github:NullVoxPopuli/tree-sitter-glimmer-javascript",
   "license": "MIT",
@@ -39,6 +39,7 @@
     "tree-sitter-javascript": "^0.21.4"
   },
   "scripts": {
+    "build:local": "tree-sitter build -o parser/glimmer_javascript.so",
     "install": "node-gyp-build",
     "prebuildify": "prebuildify --napi --strip",
     "build": "tree-sitter generate --no-bindings",

@@ -1685,10 +1685,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "glimmer_template"
-        },
-        {
-          "type": "SYMBOL",
           "name": "primary_expression"
         },
         {
@@ -1726,6 +1722,10 @@
         {
           "type": "SYMBOL",
           "name": "yield_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "glimmer_template"
         }
       ]
     },

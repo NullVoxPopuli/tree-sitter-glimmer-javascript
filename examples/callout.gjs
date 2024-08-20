@@ -1,8 +1,6 @@
 import { LightBulb } from './icons';
 
-import type { TOC } from '@ember/component/template-only';
-
-export const Callout: TOC<{ Blocks: { default: [] } }> = <template>
+export const Callout = <template>
   <div>
     <LightBulb />
     <div>

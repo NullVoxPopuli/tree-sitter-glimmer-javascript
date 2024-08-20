@@ -29,6 +29,7 @@ module.exports = grammar(JavaScript, {
       choice(
         seq(
           field("open_tag", $.glimmer_opening_tag),
+          // field("content", $.glimmer_template_content),
           field("content", repeat($._glimmer_template_content)),
           field("close_tag", $.glimmer_closing_tag),
         ),
@@ -41,6 +42,7 @@ module.exports = grammar(JavaScript, {
       ),
 
     _glimmer_template_content: (_) => /.{1,}/,
+    // glimmer_template_content: ($) => repeat1($._glimmer_template_content),
     glimmer_opening_tag: (_) => "<template>",
     glimmer_closing_tag: (_) => "</template>",
 
@@ -57,7 +59,6 @@ module.exports = grammar(JavaScript, {
      */
     expression: ($, previous) => {
       const choices = [
-        $.glimmer_template,
         ...previous.members.filter((member) => {
           // glimmer stuff is already in the upstream javascript grammar,
           // but they want to remove it.
@@ -66,6 +67,7 @@ module.exports = grammar(JavaScript, {
             member.name !== "_jsx_element" && !member.name.includes("glimmer")
           );
         }),
+        $.glimmer_template,
       ];
 
       return choice(...choices);
