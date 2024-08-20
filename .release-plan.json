@@ -1,0 +1,21 @@
+{
+  "solution": {
+    "tree-sitter-glimmer-javascript": {
+      "impact": "patch",
+      "oldVersion": "0.0.2",
+      "newVersion": "0.0.3",
+      "constraints": [
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :house: Internal"
+        }
+      ],
+      "pkgJSONPath": "./package.json"
+    }
+  },
+  "description": "## Release (2024-08-20)\n\ntree-sitter-glimmer-javascript 0.0.3 (patch)\n\n#### :bug: Bug Fix\n* `tree-sitter-glimmer-javascript`\n  * [#4](https://github.com/NullVoxPopuli/tree-sitter-glimmer-javascript/pull/4) Get queries working ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* `tree-sitter-glimmer-javascript`\n  * [#5](https://github.com/NullVoxPopuli/tree-sitter-glimmer-javascript/pull/5) Setup release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+}
