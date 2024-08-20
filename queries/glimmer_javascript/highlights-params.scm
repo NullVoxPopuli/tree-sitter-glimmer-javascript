@@ -5,8 +5,8 @@
       (identifier) @variable.parameter)
     (object_pattern
       [
-        (pair_pattern value: (identifier) @variable.parameter)
+        (pair_pattern
+          value: (identifier) @variable.parameter)
         (shorthand_property_identifier_pattern) @variable.parameter
       ])
-  ]
-)
+  ])

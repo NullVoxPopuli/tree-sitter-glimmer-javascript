@@ -1,6 +1,5 @@
 ; Scopes
 ;-------
-
 [
   (statement_block)
   (function_expression)
@@ -11,7 +10,6 @@
 
 ; Definitions
 ;------------
-
 (pattern/identifier) @local.definition
 
 (variable_declarator
@@ -19,5 +17,4 @@
 
 ; References
 ;------------
-
 (identifier) @local.reference
