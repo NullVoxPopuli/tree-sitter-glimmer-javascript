@@ -2,6 +2,39 @@
 
 const JavaScript = require("tree-sitter-javascript/grammar");
 
+function noJSX(obj) {
+  if (!obj) return;
+
+  if (Array.isArray(obj)) {
+    obj.forEach(noJSX);
+    return;
+  }
+
+  if (typeof obj === 'object') {
+    if (obj === null) return;
+
+    if (obj.type === 'CHOICE' && Array.isArray(obj.members)) {
+      obj.members = obj.members.filter(member => {
+        if (!member.name) return true;
+
+        return !member.name.includes('jsx');
+      });
+
+      noJSX(obj.members);
+      return;
+    }
+
+    for (let [key, value] of Object.entries(obj)) {
+      if (key.includes('jsx')) {
+        delete obj[key];
+      } else {
+        noJSX(value);
+      }
+    }
+  }
+}
+
+noJSX(JavaScript);
 /**
  * A <template></template> block can exist in
  * two types of locations:
