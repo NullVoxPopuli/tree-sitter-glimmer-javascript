@@ -1390,15 +1390,23 @@
         ]
       },
       "condition": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ";",
+            "named": false
+          },
           {
             "type": "empty_statement",
             "named": true
           },
           {
-            "type": "expression_statement",
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "sequence_expression",
             "named": true
           }
         ]
@@ -1426,11 +1434,15 @@
             "named": true
           },
           {
-            "type": "expression_statement",
+            "type": "expression",
             "named": true
           },
           {
             "type": "lexical_declaration",
+            "named": true
+          },
+          {
+            "type": "sequence_expression",
             "named": true
           },
           {
@@ -2213,6 +2225,7 @@
   {
     "type": "program",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -3183,6 +3196,10 @@
   },
   {
     "type": "let",
+    "named": false
+  },
+  {
+    "type": "meta",
     "named": false
   },
   {
