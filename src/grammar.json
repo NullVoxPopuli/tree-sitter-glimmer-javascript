@@ -1,15 +1,7 @@
 {
-  "0": "j",
-  "1": "a",
-  "2": "v",
-  "3": "a",
-  "4": "s",
-  "5": "c",
-  "6": "r",
-  "7": "i",
-  "8": "p",
-  "9": "t",
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "glimmer_javascript",
+  "inherits": "javascript",
   "word": "identifier",
   "rules": {
     "program": {
@@ -934,29 +926,51 @@
           "value": "("
         },
         {
-          "type": "FIELD",
-          "name": "initializer",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "lexical_declaration"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "variable_declaration"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "expression_statement"
-              },
-              {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "initializer",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "lexical_declaration"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "variable_declaration"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "initializer",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_expressions"
+                  }
+                },
+                {
+                  "type": "STRING",
+                  "value": ";"
+                }
+              ]
+            },
+            {
+              "type": "FIELD",
+              "name": "initializer",
+              "content": {
                 "type": "SYMBOL",
                 "name": "empty_statement"
               }
-            ]
-          }
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -965,8 +979,17 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "expression_statement"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_expressions"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": ";"
+                  }
+                ]
               },
               {
                 "type": "SYMBOL",
@@ -1143,6 +1166,18 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "_automatic_semicolon"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
                 }
               ]
             }
@@ -2970,17 +3005,42 @@
                 "type": "FIELD",
                 "name": "arguments",
                 "content": {
+                  "type": "SYMBOL",
+                  "name": "arguments"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC",
+          "value": "template_call",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "function",
+                "content": {
                   "type": "CHOICE",
                   "members": [
                     {
                       "type": "SYMBOL",
-                      "name": "arguments"
+                      "name": "primary_expression"
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "template_string"
+                      "name": "new_expression"
                     }
                   ]
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "arguments",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "template_string"
                 }
               }
             ]
@@ -5377,19 +5437,41 @@
       }
     },
     "meta_property": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "new"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "new"
+            },
+            {
+              "type": "STRING",
+              "value": "."
+            },
+            {
+              "type": "STRING",
+              "value": "target"
+            }
+          ]
         },
         {
-          "type": "STRING",
-          "value": "."
-        },
-        {
-          "type": "STRING",
-          "value": "target"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "import"
+            },
+            {
+              "type": "STRING",
+              "value": "."
+            },
+            {
+              "type": "STRING",
+              "value": "meta"
+            }
+          ]
         }
       ]
     },
@@ -6203,6 +6285,10 @@
       "_for_header"
     ],
     [
+      "variable_declarator",
+      "_for_header"
+    ],
+    [
       "array",
       "array_pattern"
     ],
@@ -6240,6 +6326,10 @@
       {
         "type": "STRING",
         "value": "member"
+      },
+      {
+        "type": "STRING",
+        "value": "template_call"
       },
       {
         "type": "STRING",
@@ -6331,6 +6421,10 @@
       },
       {
         "type": "STRING",
+        "value": "template_call"
+      },
+      {
+        "type": "STRING",
         "value": "new"
       },
       {
@@ -6364,6 +6458,16 @@
       {
         "type": "STRING",
         "value": "object"
+      }
+    ],
+    [
+      {
+        "type": "SYMBOL",
+        "name": "meta_property"
+      },
+      {
+        "type": "SYMBOL",
+        "name": "import"
       }
     ],
     [
@@ -6425,6 +6529,10 @@
     {
       "type": "SYMBOL",
       "name": "regex_pattern"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "jsx_text"
     }
   ],
   "inline": [

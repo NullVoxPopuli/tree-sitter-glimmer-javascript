@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       node-addon-api:
-        specifier: ^7.1.0
-        version: 7.1.1
+        specifier: ^8.2.1
+        version: 8.2.1
       node-gyp-build:
-        specifier: ^4.8.0
-        version: 4.8.1
+        specifier: ^4.8.2
+        version: 4.8.2
       tree-sitter:
         specifier: ^0.21.0
         version: 0.21.1
@@ -28,14 +28,14 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       release-plan:
-        specifier: ^0.9.0
+        specifier: ^0.9.2
         version: 0.9.2(encoding@0.1.13)
       tree-sitter-cli:
-        specifier: ^0.22.6
-        version: 0.22.6
+        specifier: ^0.24.3
+        version: 0.24.3
       tree-sitter-javascript:
-        specifier: ^0.21.4
-        version: 0.21.4(tree-sitter@0.21.1)
+        specifier: ^0.23.0
+        version: 0.23.0(tree-sitter@0.21.1)
 
 packages:
 
@@ -792,11 +792,8 @@ packages:
     resolution: {integrity: sha512-ThjYBfoDNr08AWx6hGaRbfPwxKV9kVzAzOzlLKbk2CuqXE2xnCh+cbAGnwM3t8Lq4v9rUB7VfondlkBckcJrVA==}
     engines: {node: '>=10'}
 
-  node-addon-api@7.1.1:
-    resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
-
-  node-addon-api@8.1.0:
-    resolution: {integrity: sha512-yBY+qqWSv3dWKGODD6OGE6GnTX7Q2r+4+DfpqxHSHh8x0B4EKP9+wVGLS6U/AM1vxSNNmUEuIV5EGhYwPpfOwQ==}
+  node-addon-api@8.2.1:
+    resolution: {integrity: sha512-vmEOvxwiH8tlOcv4SyE8RH34rI5/nWVaigUeAUPawC6f0+HoDthwI0vkMu4tbtsZrXq6QXFfrkhjofzKEs5tpA==}
     engines: {node: ^18 || ^20 || >= 21}
 
   node-fetch@2.7.0:
@@ -808,8 +805,8 @@ packages:
       encoding:
         optional: true
 
-  node-gyp-build@4.8.1:
-    resolution: {integrity: sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==}
+  node-gyp-build@4.8.2:
+    resolution: {integrity: sha512-IRUxE4BVsHWXkV/SFOut4qTlagw2aM8T5/vnTsmrHJvVoKueJHRc/JaFND7QDDc61kLYUJ6qlZM3sqTSyx2dTw==}
     hasBin: true
 
   normalize-package-data@6.0.2:
@@ -1119,17 +1116,17 @@ packages:
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
-  tree-sitter-cli@0.22.6:
-    resolution: {integrity: sha512-s7mYOJXi8sIFkt/nLJSqlYZP96VmKTc3BAwIX0rrrlRxWjWuCwixFqwzxWZBQz4R8Hx01iP7z3cT3ih58BUmZQ==}
+  tree-sitter-cli@0.24.3:
+    resolution: {integrity: sha512-5vS0SiJf31tMTn9CYLsu5l18qXaw5MLFka3cuGxOB5f4TtgoUSK1Sog6rKmqBc7PvFJq37YcQBjj9giNy2cJPw==}
+    engines: {node: '>=12.0.0'}
     hasBin: true
 
-  tree-sitter-javascript@0.21.4:
-    resolution: {integrity: sha512-Lrk8yahebwrwc1sWJE9xPcz1OnnqiEV7Dh5fbN6EN3wNAdu9r06HpTqLqDwUUbnG4EB46Sfk+FJFAOldfoKLOw==}
+  tree-sitter-javascript@0.23.0:
+    resolution: {integrity: sha512-xw0nc8P/u+uhoRuKmalcv/3OGGLtaeVWx/NpqAHXPvJsdSPdkx+IoRod4W4hw1zDNj1V6xzJgdATk0IPNUNy3w==}
     peerDependencies:
       tree-sitter: ^0.21.1
-      tree_sitter: '*'
     peerDependenciesMeta:
-      tree_sitter:
+      tree-sitter:
         optional: true
 
   tree-sitter@0.21.1:
@@ -2075,9 +2072,7 @@ snapshots:
     dependencies:
       semver: 7.6.3
 
-  node-addon-api@7.1.1: {}
-
-  node-addon-api@8.1.0: {}
+  node-addon-api@8.2.1: {}
 
   node-fetch@2.7.0(encoding@0.1.13):
     dependencies:
@@ -2085,7 +2080,7 @@ snapshots:
     optionalDependencies:
       encoding: 0.1.13
 
-  node-gyp-build@4.8.1: {}
+  node-gyp-build@4.8.2: {}
 
   normalize-package-data@6.0.2:
     dependencies:
@@ -2409,18 +2404,19 @@ snapshots:
 
   tr46@0.0.3: {}
 
-  tree-sitter-cli@0.22.6: {}
+  tree-sitter-cli@0.24.3: {}
 
-  tree-sitter-javascript@0.21.4(tree-sitter@0.21.1):
+  tree-sitter-javascript@0.23.0(tree-sitter@0.21.1):
     dependencies:
-      node-addon-api: 8.1.0
-      node-gyp-build: 4.8.1
+      node-addon-api: 8.2.1
+      node-gyp-build: 4.8.2
+    optionalDependencies:
       tree-sitter: 0.21.1
 
   tree-sitter@0.21.1:
     dependencies:
-      node-addon-api: 8.1.0
-      node-gyp-build: 4.8.1
+      node-addon-api: 8.2.1
+      node-gyp-build: 4.8.2
 
   type-check@0.4.0:
     dependencies:
