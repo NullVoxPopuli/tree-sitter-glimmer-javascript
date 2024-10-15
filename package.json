@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-glimmer-javascript",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Glimmer-flavored JavaScript grammar for tree-sitter",
   "keywords": [
     "incremental",
