@@ -26,8 +26,8 @@ jobs:
     name: Queries
     runs-on: ubuntu-latest
     env:
-      NVIM_TAG: nightly
-      # NVIM_TAG: stable
+      # NVIM_TAG: nightly
+      NVIM_TAG: stable
     steps:
       - uses: actions/checkout@v4
       - name: Prepare
