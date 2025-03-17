@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-03-17)
+
+tree-sitter-glimmer-javascript 0.2.0 (minor)
+
+#### :rocket: Enhancement
+* `tree-sitter-glimmer-javascript`
+  * [#13](https://github.com/NullVoxPopuli/tree-sitter-glimmer-javascript/pull/13) Expose template content as `raw_text` ([@mogstad](https://github.com/mogstad))
+
+#### Committers: 1
+- Bjarne Mogstad ([@mogstad](https://github.com/mogstad))
+
 ## Release (2024-10-15)
 
 tree-sitter-glimmer-javascript 0.1.0 (minor)
