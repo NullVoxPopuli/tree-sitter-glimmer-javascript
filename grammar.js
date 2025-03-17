@@ -47,6 +47,9 @@ noJSX(JavaScript);
  */
 module.exports = grammar(JavaScript, {
   name: "glimmer_javascript",
+
+  externals: ($, previous) => previous.concat([$.raw_text]),
+
   rules: {
     /**
      * TODO: add support for attributes
@@ -59,23 +62,13 @@ module.exports = grammar(JavaScript, {
      *         https://github.com/emberjs/rfcs/
      */
     glimmer_template: ($) =>
-      choice(
         seq(
           field("open_tag", $.glimmer_opening_tag),
-          // field("content", $.glimmer_template_content),
-          field("content", repeat($._glimmer_template_content)),
+          optional(alias(repeat($._glimmer_template_content), $.raw_text)),
           field("close_tag", $.glimmer_closing_tag),
         ),
-        // empty template has no content
-        // <template></template>
-        seq(
-          field("open_tag", $.glimmer_opening_tag),
-          field("close_tag", $.glimmer_closing_tag),
-        ),
-      ),
 
     _glimmer_template_content: (_) => /.{1,}/,
-    // glimmer_template_content: ($) => repeat1($._glimmer_template_content),
     glimmer_opening_tag: (_) => "<template>",
     glimmer_closing_tag: (_) => "</template>",
 
