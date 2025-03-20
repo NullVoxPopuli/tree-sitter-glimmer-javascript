@@ -11,6 +11,7 @@ enum TokenType {
     LOGICAL_OR,
     ESCAPE_SEQUENCE,
     REGEX_PATTERN,
+    JSX_TEXT,
 };
 
 void *tree_sitter_javascript_external_scanner_create() { return NULL; }
