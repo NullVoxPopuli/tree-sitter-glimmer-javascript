@@ -2409,16 +2409,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "REPEAT",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_glimmer_template_content"
-                }
-              },
-              "named": true,
-              "value": "raw_text"
+              "type": "SYMBOL",
+              "name": "raw_text"
             },
             {
               "type": "BLANK"
@@ -2440,12 +2432,38 @@
       "value": ".{1,}"
     },
     "glimmer_opening_tag": {
-      "type": "STRING",
-      "value": "<template>"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "glimmer_template_tag_name"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
     },
     "glimmer_closing_tag": {
-      "type": "STRING",
-      "value": "</template>"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "</"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "glimmer_template_tag_name"
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        }
+      ]
     },
     "html_character_reference": {
       "type": "PATTERN",
@@ -6221,6 +6239,10 @@
           "value": ";"
         }
       ]
+    },
+    "glimmer_template_tag_name": {
+      "type": "STRING",
+      "value": "template"
     }
   },
   "extras": [

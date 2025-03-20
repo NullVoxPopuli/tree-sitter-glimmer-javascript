@@ -10,14 +10,14 @@ function noJSX(obj) {
     return;
   }
 
-  if (typeof obj === 'object') {
+  if (typeof obj === "object") {
     if (obj === null) return;
 
-    if (obj.type === 'CHOICE' && Array.isArray(obj.members)) {
-      obj.members = obj.members.filter(member => {
+    if (obj.type === "CHOICE" && Array.isArray(obj.members)) {
+      obj.members = obj.members.filter((member) => {
         if (!member.name) return true;
 
-        return !member.name.includes('jsx');
+        return !member.name.includes("jsx");
       });
 
       noJSX(obj.members);
@@ -25,7 +25,7 @@ function noJSX(obj) {
     }
 
     for (let [key, value] of Object.entries(obj)) {
-      if (key.includes('jsx')) {
+      if (key.includes("jsx")) {
         delete obj[key];
       } else {
         noJSX(value);
@@ -62,15 +62,15 @@ module.exports = grammar(JavaScript, {
      *         https://github.com/emberjs/rfcs/
      */
     glimmer_template: ($) =>
-        seq(
-          field("open_tag", $.glimmer_opening_tag),
-          optional(alias(repeat($._glimmer_template_content), $.raw_text)),
-          field("close_tag", $.glimmer_closing_tag),
-        ),
+      seq(
+        field("open_tag", $.glimmer_opening_tag),
+        optional($.raw_text),
+        field("close_tag", $.glimmer_closing_tag),
+      ),
 
-    _glimmer_template_content: (_) => /.{1,}/,
-    glimmer_opening_tag: (_) => "<template>",
-    glimmer_closing_tag: (_) => "</template>",
+    glimmer_opening_tag: ($) => seq("<", $.glimmer_template_tag_name, ">"),
+    glimmer_closing_tag: ($) => seq("</", $.glimmer_template_tag_name, ">"),
+    glimmer_template_tag_name: (_) => "template",
 
     /**
      * 2. Any Expression.
