@@ -13,9 +13,11 @@ const Named = <template>
     (variable_declarator
       (identifier)
       (glimmer_template
-        (glimmer_opening_tag)
+        (glimmer_opening_tag
+          (glimmer_template_tag_name))
         (raw_text)
-        (glimmer_closing_tag)))))
+        (glimmer_closing_tag
+          (glimmer_template_tag_name))))))
 
 ============================================
 Nested Template
@@ -32,10 +34,11 @@ const Named = <template>
     (variable_declarator
       (identifier)
       (glimmer_template
-        (glimmer_opening_tag)
+        (glimmer_opening_tag
+          (glimmer_template_tag_name))
         (raw_text)
-        (glimmer_closing_tag)))))
-
+        (glimmer_closing_tag
+          (glimmer_template_tag_name))))))
 
 ============================================
 Empty
@@ -48,9 +51,10 @@ Empty
 (program
   (expression_statement
     (glimmer_template
-      (glimmer_opening_tag)
-      (glimmer_closing_tag))))
-
+      (glimmer_opening_tag
+        (glimmer_template_tag_name))
+      (glimmer_closing_tag
+        (glimmer_template_tag_name)))))
 
 ============================================
 Two Components
@@ -71,15 +75,18 @@ const WithSemi = <template>
     (variable_declarator
       (identifier)
       (glimmer_template
-        (glimmer_opening_tag)
+        (glimmer_opening_tag
+          (glimmer_template_tag_name))
         (raw_text)
-        (glimmer_closing_tag))))
-
+        (glimmer_closing_tag
+          (glimmer_template_tag_name)))))
   (expression_statement
     (glimmer_template
-      (glimmer_opening_tag)
+      (glimmer_opening_tag
+        (glimmer_template_tag_name))
       (raw_text)
-      (glimmer_closing_tag))))
+      (glimmer_closing_tag
+        (glimmer_template_tag_name)))))
 
 ============================================
 Multiple Assignment
@@ -104,22 +111,26 @@ const WithSemi = <template>
     (variable_declarator
       (identifier)
       (glimmer_template
-        (glimmer_opening_tag)
-        (glimmer_closing_tag))))
-
+        (glimmer_opening_tag
+          (glimmer_template_tag_name))
+        (glimmer_closing_tag
+          (glimmer_template_tag_name)))))
   (lexical_declaration
     (variable_declarator
       (identifier)
       (glimmer_template
-        (glimmer_opening_tag)
+        (glimmer_opening_tag
+          (glimmer_template_tag_name))
         (raw_text)
-        (glimmer_closing_tag))))
-
+        (glimmer_closing_tag
+          (glimmer_template_tag_name)))))
   (expression_statement
     (glimmer_template
-      (glimmer_opening_tag)
+      (glimmer_opening_tag
+        (glimmer_template_tag_name))
       (raw_text)
-      (glimmer_closing_tag))))
+      (glimmer_closing_tag
+        (glimmer_template_tag_name)))))
 
 ============================================
 Class Component
@@ -138,9 +149,11 @@ class InClass {
     (identifier)
     (class_body
       (glimmer_template
-        (glimmer_opening_tag)
+        (glimmer_opening_tag
+          (glimmer_template_tag_name))
         (raw_text)
-        (glimmer_closing_tag)))))
+        (glimmer_closing_tag
+          (glimmer_template_tag_name))))))
 
 ============================================
 JS Regex Evasion
@@ -156,7 +169,8 @@ JS Regex Evasion
 (program
   (expression_statement
     (glimmer_template
-      (glimmer_opening_tag)
+      (glimmer_opening_tag
+        (glimmer_template_tag_name))
       (raw_text)
-      (glimmer_closing_tag)
-    )))
+      (glimmer_closing_tag
+        (glimmer_template_tag_name)))))

@@ -13,7 +13,7 @@
 #include <string.h>
 
 enum GlimmerTokenType {
-    RAW_TEXT = REGEX_PATTERN + 1,
+    RAW_TEXT = JSX_TEXT + 1,
 };
 
 static bool scan_raw_text(void *payload, TSLexer *lexer) {
