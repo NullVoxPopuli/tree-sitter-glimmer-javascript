@@ -8,7 +8,7 @@
     "tree-sitter",
     "javascript"
   ],
-  "repository": "github:NullVoxPopuli/tree-sitter-glimmer-javascript",
+  "repository": "github:ember-tooling/tree-sitter-glimmer-javascript",
   "license": "MIT",
   "author": "NullVoxPopuli",
   "main": "bindings/node",
