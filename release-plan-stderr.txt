@@ -1,0 +1,7 @@
+# Unlabeled Changes
+
+* `tree-sitter-glimmer-javascript`
+  * [#15](https://github.com/ember-tooling/tree-sitter-glimmer-javascript/pull/15) Implement external scanner for raw_text ([@mogstad](https://github.com/mogstad))
+
+
+*Cannot plan release until the above changes are labeled*.
